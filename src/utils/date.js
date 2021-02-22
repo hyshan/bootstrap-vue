@@ -1,5 +1,5 @@
 // Date utility functions
-import { CALENDAR_GREGORY } from '../constants/date'
+import { CALENDAR_MINGUO } from '../constants/date'
 import { RX_DATE, RX_DATE_SPLIT } from '../constants/regex'
 import { concat } from './array'
 import { identity } from './identity'
@@ -35,7 +35,7 @@ export const formatYMD = date => {
 }
 
 // Given a locale (or locales), resolve the browser available locale
-export const resolveLocale = (locales, calendar = CALENDAR_GREGORY) => /* istanbul ignore next */ {
+export const resolveLocale = (locales, calendar = CALENDAR_MINGUO) => /* istanbul ignore next */ {
   locales = concat(locales).filter(identity)
   const fmt = new Intl.DateTimeFormat(locales, { calendar })
   return fmt.resolvedOptions().locale

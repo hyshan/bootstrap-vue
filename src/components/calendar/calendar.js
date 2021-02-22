@@ -1,7 +1,7 @@
 import { Vue } from '../../vue'
 import { NAME_CALENDAR } from '../../constants/components'
 import {
-  CALENDAR_GREGORY,
+  CALENDAR_MINGUO,
   CALENDAR_LONG,
   CALENDAR_NARROW,
   CALENDAR_SHORT,
@@ -244,7 +244,8 @@ export const BCalendar = Vue.extend({
     },
     computedLocale() {
       // Returns the resolved locale used by the calendar
-      return resolveLocale(concat(this.locale).filter(identity), CALENDAR_GREGORY)
+      // use zh-TW as default local
+      return resolveLocale(concat('zh-TW').filter(identity), CALENDAR_MINGUO)
     },
     computedDateDisabledFn() {
       const { dateDisabledFn } = this
@@ -260,11 +261,11 @@ export const BCalendar = Vue.extend({
       // Needed because IE 11 resolves `ar-IR` as islamic-civil calendar
       // and IE 11 (and some other browsers) do not support the `calendar` option
       // And we currently only support the gregorian calendar
-      const fmt = new Intl.DateTimeFormat(this.computedLocale, { calendar: CALENDAR_GREGORY })
+      const fmt = new Intl.DateTimeFormat(this.computedLocale, { calendar: CALENDAR_MINGUO })
       const calendar = fmt.resolvedOptions().calendar
       let locale = fmt.resolvedOptions().locale
       /* istanbul ignore if: mainly for IE 11 and a few other browsers, hard to test in JSDOM */
-      if (calendar !== CALENDAR_GREGORY) {
+      if (calendar !== CALENDAR_MINGUO) {
         // Ensure the locale requests the gregorian calendar
         // Mainly for IE 11, and currently we can't handle non-gregorian calendars
         // TODO: Should we always return this value?
@@ -380,7 +381,7 @@ export const BCalendar = Vue.extend({
         minute: undefined,
         second: undefined,
         // Ensure calendar is gregorian
-        calendar: CALENDAR_GREGORY
+        calendar: CALENDAR_MINGUO
       })
     },
     formatYearMonth() {
@@ -388,14 +389,14 @@ export const BCalendar = Vue.extend({
       return createDateFormatter(this.calendarLocale, {
         year: DATE_FORMAT_NUMERIC,
         month: CALENDAR_LONG,
-        calendar: CALENDAR_GREGORY
+        calendar: CALENDAR_MINGUO
       })
     },
     formatWeekdayName() {
       // Long weekday name for weekday header aria-label
       return createDateFormatter(this.calendarLocale, {
         weekday: CALENDAR_LONG,
-        calendar: CALENDAR_GREGORY
+        calendar: CALENDAR_MINGUO
       })
     },
     formatWeekdayNameShort() {
@@ -403,7 +404,7 @@ export const BCalendar = Vue.extend({
       // defaults to 'short' 3 letter days, where possible
       return createDateFormatter(this.calendarLocale, {
         weekday: this.weekdayHeaderFormat || CALENDAR_SHORT,
-        calendar: CALENDAR_GREGORY
+        calendar: CALENDAR_MINGUO
       })
     },
     formatDay() {
