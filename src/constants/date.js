@@ -1,4 +1,5 @@
 export const CALENDAR_GREGORY = 'gregory'
+export const CALENDAR_MINGUO  = 'roc'
 export const CALENDAR_LONG = 'long'
 export const CALENDAR_NARROW = 'narrow'
 export const CALENDAR_SHORT = 'short'
