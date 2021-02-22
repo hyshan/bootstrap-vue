@@ -15,7 +15,7 @@ export const createDate = (...args) => new Date(...args)
 export const parseYMD = date => {
   if (isString(date) && RX_DATE.test(date.trim())) {
     const [year, month, day] = date.split(RX_DATE_SPLIT).map(v => toInteger(v, 1))
-    return createDate(year, month - 1, day)
+    return createDate(year + 1911, month - 1, day)
   } else if (isDate(date)) {
     return createDate(date.getFullYear(), date.getMonth(), date.getDate())
   }
@@ -28,7 +28,7 @@ export const formatYMD = date => {
   if (!date) {
     return null
   }
-  const year = date.getFullYear()
+  const year = date.getFullYear() - 1911
   const month = `0${date.getMonth() + 1}`.slice(-2)
   const day = `0${date.getDate()}`.slice(-2)
   return `${year}-${month}-${day}`
